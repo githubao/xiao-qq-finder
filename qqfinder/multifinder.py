@@ -19,13 +19,14 @@ import threading
 import threadpool
 
 from qqfinder.pth import *
-from qqfinder.userfinder import is_not_legal, QQUserFinder
+from qqfinder.userfinder import *
 
 FILE_PATH = '{}/file/'.format(ROOT_PATH)
 
 myUser = QQUserFinder()
 
-pool_size = 100
+pool_size = 50
+
 
 # cnt = 0
 
@@ -52,7 +53,9 @@ def request_item(uid):
         # if True:
         #     raise TypeError('hee')
         res = myUser.getUser(uid)
-        if is_not_legal(res):
+        if is_501_err(res):
+            res = ''
+        elif is_not_legal(res):
             return
 
     except Exception as e:
@@ -65,9 +68,10 @@ def request_item(uid):
     with open(fname, 'a', encoding='utf-8') as fw:
         fw.write('{}\n'.format(res))
 
-    # cnt += 1
-    # if cnt % 100 == 0:
-    #     logging.info('process qq cnt: {}'.format(cnt))
+        # cnt += 1
+        # if cnt % 100 == 0:
+        #     logging.info('process qq cnt: {}'.format(cnt))
+
 
 def load_datas():
     # return [i for i in range(10000, 10000000)]

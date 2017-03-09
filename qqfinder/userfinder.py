@@ -122,15 +122,14 @@ def is_not_legal(res):
     if not res:
         return False
 
-    # 这时候是被封了
-    if '501 Not Implemented' in res:
-        return True
-
     json_data = json.loads(res)
     if json_data['retcode'] == 6:
         return True
     return False
 
+# 这时候是被封了
+def is_501_err(res):
+    return True if '501 Not Implemented' in res else False
 
 if __name__ == '__main__':
     test()
