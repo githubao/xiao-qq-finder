@@ -64,7 +64,7 @@ class QQUserFinder():
 
     def set_random_user(self):
         random_user = random.choice(users_dict)
-        random_user = users_dict[0]
+        # random_user = users_dict[6]
         self.headers['Cookie'] = cookie_format.format(random_user['uid'], random_user['skey'])
         self.post_data['ldw'] = get_ldw(random_user['skey'])
 
@@ -121,6 +121,10 @@ def test():
 def is_not_legal(res):
     if not res:
         return False
+
+    # 这时候是被封了
+    if '501 Not Implemented' in res:
+        return True
 
     json_data = json.loads(res)
     if json_data['retcode'] == 6:

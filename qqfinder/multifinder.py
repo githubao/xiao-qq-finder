@@ -23,7 +23,7 @@ from qqfinder.userfinder import is_not_legal, QQUserFinder
 
 FILE_PATH = '{}/file/'.format(ROOT_PATH)
 
-myUser = QQUserFinder(ldw='1037320121')
+myUser = QQUserFinder()
 
 pool_size = 100
 
@@ -72,7 +72,7 @@ def request_item(uid):
 def load_datas():
     # return [i for i in range(10000, 10000000)]
     # return [i for i in range(10000, 15000)]
-    return [i for i in range(10000, 10100)]
+    return [i for i in range(10000, 11000)]
 
 
 def main():
