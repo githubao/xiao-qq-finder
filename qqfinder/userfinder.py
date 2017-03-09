@@ -82,7 +82,7 @@ def test():
     myUser = QQUserFinder(ldw='1037320121')
 
     with open(out_file, 'w', encoding='utf-8') as fw:
-        for i in range(10001, 10000000):
+        for i in range(10000, 10000000):
         # for i in range(10004, 10005):
             # for i in range(779439458, 779439460):
             try:
