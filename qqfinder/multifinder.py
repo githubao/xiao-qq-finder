@@ -71,7 +71,8 @@ def request_item(uid):
 
 def load_datas():
     # return [i for i in range(10000, 10000000)]
-    return [i for i in range(10000, 15000)]
+    # return [i for i in range(10000, 15000)]
+    return [i for i in range(10000, 10100)]
 
 
 def main():
