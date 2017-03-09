@@ -63,8 +63,8 @@ class QQUserFinder():
         self.post_data['keyword'] = keyword
 
     def set_random_user(self):
-        # random_user = random.choice(users_dict)
-        random_user = users_dict[0]
+        random_user = random.choice(users_dict)
+        # random_user = users_dict[0]
         self.headers['Cookie'] = random_user['Cookie']
         self.post_data['ldw'] = random_user['ldw']
 
