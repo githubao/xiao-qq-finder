@@ -14,7 +14,11 @@
 '''
 
 import requests
-from qqfinder import qqcfg
+from qqfinder.pth import *
+import json
+
+out_file = '{}/qq-info.json'.format(FILE_PATH)
+
 
 class QQUserFinder():
     '''
@@ -22,17 +26,17 @@ class QQUserFinder():
     '''
     url = 'http://cgi.find.qq.com/qqfind/buddy/search_v3'
 
-    def __init__(self, qq, skey, ldw, keyword=0):
+    def __init__(self, ldw, keyword=0):
         self.headers = {
             'Host': 'cgi.find.qq.com',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.59 QQ/7.9.14308.201 Safari/537.36',
             'Accept': 'application/json, text/javascript, */*; q=0.01',
             'Accept-Language': 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
             'Accept-Encoding': 'gzip, deflate',
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            'Referer': 'http://find.qq.com/',
-            'origin': 'http://find.qq.com',
-            'Cookie': 'uin=o0%d; skey=@%s;' % (qq, skey)
+            'Referer': 'http://find.qq.com/index.html?version=1&im_version=5457&width=910&height=610&search_target=0',
+            'Origin': 'http://find.qq.com',
+            'Cookie': 'RK=GX0P9Rk+e4; pgv_pvid=3960994630; pt2gguin=o0779439458; ptcz=8b6dfb1adb6ab7e170264682e2b1b64b545053cec8e3ccd248c19eb5ca7e75ab; uin=o779439458; skey=ZDl6R0EInV; itkn=24609040'
         }
         self.post_data = {
             'num': 20,
@@ -58,11 +62,10 @@ class QQUserFinder():
     def setKeyword(self, keyword=0):
         self.post_data['keyword'] = keyword
 
-
     def fetch_info(self):
         ret = None
         try:
-            response = requests.post(self.url,self.post_data,headers=self.headers)
+            response = requests.post(self.url, self.post_data, headers=self.headers)
             ret = response.content.decode()
         except Exception as e:
             print('[Error] Query: %d, ErrorMsg: %d %s' % (self.post_data['keyword'], e.args[0], e.args[1]))
@@ -76,8 +79,26 @@ class QQUserFinder():
 
 
 def test():
-    myUser = QQUserFinder(qq=qqcfg.QQ, skey=qqcfg.SKEY, ldw=qqcfg.LDW)
-    print(myUser.getUser('530900642'))
+    myUser = QQUserFinder(ldw='1037320121')
+
+    with open(out_file, 'w', encoding='utf-8') as fw:
+        for i in range(10001, 300000000):
+            # for i in range(10001, 10004):
+            # for i in range(779439458, 779439460):
+            try:
+                # if True:
+                #     raise TypeError('hee')
+                res = myUser.getUser(i)
+            except Exception as e:
+                logging.error("process qq num: [{}] err, {}".format(i, e))
+                res = '{}{}{}'.format('{"retcode":-1,"result":', i, '}')
+            # json.dump(res, fw, ensure_ascii=False)
+            fw.write(res)
+            fw.write('\n')
+            fw.flush()
+
+            if i % 100 == 0:
+                logging.info("process qq num: {}".format(i))
 
 
 if __name__ == '__main__':
