@@ -84,7 +84,7 @@ def test():
     with open(out_file, 'w', encoding='utf-8') as fw:
         # for i in range(10001, 300000000):
         for i in range(10004, 10005):
-        # for i in range(779439458, 779439460):
+            # for i in range(779439458, 779439460):
             try:
                 # if True:
                 #     raise TypeError('hee')
@@ -96,6 +96,7 @@ def test():
             except Exception as e:
                 logging.error("process qq num: [{}] err, {}".format(i, e))
             if not res:
+                logging.error("process qq num: [{}] err, {}".format(i, None))
                 res = '{}{}{}'.format('{"retcode":-1,"result":', i, '}')
             # json.dump(res, fw, ensure_ascii=False)
             fw.write(res)
