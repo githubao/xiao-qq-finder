@@ -89,8 +89,13 @@ def test():
                 # if True:
                 #     raise TypeError('hee')
                 res = myUser.getUser(i)
+
+                if is_not_legal(res):
+                    continue
+
             except Exception as e:
                 logging.error("process qq num: [{}] err, {}".format(i, e))
+            if not res:
                 res = '{}{}{}'.format('{"retcode":-1,"result":', i, '}')
             # json.dump(res, fw, ensure_ascii=False)
             fw.write(res)
@@ -99,6 +104,17 @@ def test():
 
             if i % 100 == 0:
                 logging.info("process qq num: {}".format(i))
+
+
+# 过滤对方的隐私设置，retcode = 6
+def is_not_legal(res):
+    if not res:
+        return False
+
+    json_data = json.load(res)
+    if json_data['retcode'] == 6:
+        return True
+    return False
 
 
 if __name__ == '__main__':
