@@ -82,9 +82,9 @@ def test():
     myUser = QQUserFinder(ldw='1037320121')
 
     with open(out_file, 'w', encoding='utf-8') as fw:
-        for i in range(10001, 300000000):
-            # for i in range(10001, 10004):
-            # for i in range(779439458, 779439460):
+        # for i in range(10001, 300000000):
+        for i in range(10004, 10005):
+        # for i in range(779439458, 779439460):
             try:
                 # if True:
                 #     raise TypeError('hee')
@@ -111,7 +111,7 @@ def is_not_legal(res):
     if not res:
         return False
 
-    json_data = json.load(res)
+    json_data = json.loads(res)
     if json_data['retcode'] == 6:
         return True
     return False
