@@ -24,16 +24,32 @@ USER_AGENT_POOL = [
 
 users_dict = [
     {'uid': 971230206,
-     'skey':'Z82Ae3PGUL',
-     'Cookie': 'RK=GT+ufAR6e8; pgv_pvid=5824311650; pt2gguin=o0971230206; ptcz=2638d9b2bc50459c407ebc78db65cf2032904f6c9e617fcca8b4109067c0f7c2; uin=o971230206; skey=Z82Ae3PGUL; itkn=24609040',
-     'ldw': 1013161690
+     'skey': 'Z82Ae3PGUL',
      }, {
         'uid': 779439458,
-        'skey':'ZDl6R0EInV',
-        'Cookie': 'RK=GX0P9Rk+e4; pgv_pvid=3960994630; pt2gguin=o0779439458; ptcz=8b6dfb1adb6ab7e170264682e2b1b64b545053cec8e3ccd248c19eb5ca7e75ab; uin=o779439458; skey=ZDl6R0EInV; itkn=24609040',
-        'ldw': 1037320121,
+        'skey': 'ZDl6R0EInV',
+    }, {
+        'uid': 919230483,
+        'skey': 'ZAuvpdz2IK',
+    }, {
+        'uid': 320621488,
+        'skey': 'ZeBAmOuEgQ',
+    }, {
+        'uid': 424482036,
+        'skey': 'Z8Drzc4rC3',
+    }, {
+        'uid': 275232143,
+        'skey': 'ZJxjcC2lK1',
+    }, {
+        'uid': 207339180,
+        'skey': 'ZpvThXejJY',
+    }, {
+        'uid': 480021292,
+        'skey': 'Zo0MFaeiLO',
     }
 ]
+
+cookie_format = 'uin=o{}; skey={}'
 
 
 def get_ldw(skey):
@@ -45,6 +61,7 @@ def get_ldw(skey):
 
 
 if __name__ == '__main__':
-    skey = 'Z82Ae3PGUL'
+    # skey = 'Z82Ae3PGUL'
+    skey = '@rwUbGWWeQ'
     ldw = get_ldw(skey)
     print(ldw)

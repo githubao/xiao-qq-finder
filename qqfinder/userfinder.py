@@ -16,7 +16,7 @@
 import requests
 from qqfinder.pth import *
 import json
-from qqfinder.settings import USER_AGENT_POOL, users_dict
+from qqfinder.settings import *
 import random
 
 out_file = '{}/file/qq-info.json'.format(ROOT_PATH)
@@ -64,9 +64,9 @@ class QQUserFinder():
 
     def set_random_user(self):
         random_user = random.choice(users_dict)
-        # random_user = users_dict[0]
-        self.headers['Cookie'] = random_user['Cookie']
-        self.post_data['ldw'] = random_user['ldw']
+        random_user = users_dict[0]
+        self.headers['Cookie'] = cookie_format.format(random_user['uid'], random_user['skey'])
+        self.post_data['ldw'] = get_ldw(random_user['skey'])
 
     def fetch_info(self):
         ret = None
