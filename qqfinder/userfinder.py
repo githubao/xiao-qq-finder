@@ -17,7 +17,7 @@ import requests
 from qqfinder.pth import *
 import json
 
-out_file = '{}/qq-info.json'.format(FILE_PATH)
+out_file = '{}/qq-info.json'.format(ROOT_PATH)
 
 
 class QQUserFinder():
